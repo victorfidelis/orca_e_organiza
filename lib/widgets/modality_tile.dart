@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:orca_e_organiza/core/models/modality_model.dart';
 import 'package:orca_e_organiza/core/services/utils_service.dart';
 import 'package:orca_e_organiza/widgets/line_double_text.dart';
+import 'package:orca_e_organiza/widgets/line_double_text_link.dart';
 import 'package:orca_e_organiza/widgets/text_button_botton_sheet.dart';
 import 'package:orca_e_organiza/core/themes/themes.dart';
 
@@ -10,6 +11,8 @@ class ModalityTile extends StatefulWidget {
   Function(int, [bool]) openModality;
   Function(int) editModality;
   Function(int) deleteModality;
+  Function(String) openPage;
+  Function(String) openPhone;
   int index;
 
   static bool isStart = true;
@@ -20,6 +23,8 @@ class ModalityTile extends StatefulWidget {
     required this.openModality,
     required this.editModality,
     required this.deleteModality,
+    required this.openPage,
+    required this.openPhone,
     required this.index,
   }) : super(key: key);
 
@@ -31,10 +36,17 @@ class _ModalityTileState extends State<ModalityTile> {
   bool _animate = false;
   bool detail = false;
 
+  bool showAddress = false;
+  bool showPhone = false;
+  bool showSite = false;
+  bool showEmail = false;
+  bool showDescription = false;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
 
     if (ModalityTile.isStart) {
       int multiplier = widget.index <= 10 ? widget.index : 10;
@@ -53,18 +65,21 @@ class _ModalityTileState extends State<ModalityTile> {
   Widget build(BuildContext context) {
 
     String modalityName = widget.modalityModel.name;
-    String budgetName =
-        widget.modalityModel.budgetModel?.name ?? '';
-    String budgetValue = formatterMoney.format(
-        widget.modalityModel.budgetModel?.value ??
-            0.00);
-    String budgetAddress =
-        widget.modalityModel.budgetModel?.address ??
-            '';
-    String budgetPhone =
-        widget.modalityModel.budgetModel?.phone ?? '';
-    String budgetDescription = widget.modalityModel.budgetModel?.description ??
-        '';
+    String budgetName = widget.modalityModel.budgetModel?.name ?? '';
+    String budgetValue = formatterMoney.format(widget.modalityModel.budgetModel?.value ?? 0.00);
+    String budgetAddress = widget.modalityModel.budgetModel?.address ?? '';
+    String budgetPhone = widget.modalityModel.budgetModel?.phone ?? '';
+    String budgetSite = widget.modalityModel.budgetModel?.site ?? '';
+    String budgetEmail = widget.modalityModel.budgetModel?.email ?? '';
+    String budgetDescription = widget.modalityModel.budgetModel?.description ?? '';
+
+    if (widget.modalityModel.budgetModel != null) {
+      if (widget.modalityModel.budgetModel!.address.trim().isNotEmpty) showAddress = true;
+      if (widget.modalityModel.budgetModel!.phone.trim().isNotEmpty) showPhone = true;
+      if (widget.modalityModel.budgetModel!.site.trim().isNotEmpty) showSite = true;
+      if (widget.modalityModel.budgetModel!.email.trim().isNotEmpty) showEmail = true;
+      if (widget.modalityModel.budgetModel!.description.trim().isNotEmpty) showDescription = true;
+    }
 
     return AnimatedOpacity(
       duration: const Duration(milliseconds: 600),
@@ -182,21 +197,35 @@ class _ModalityTileState extends State<ModalityTile> {
                                 ? Container()
                                 : Column(
                                     children: [
-                                      const SizedBox(height: 8),
-                                      LineDoubleText(
+                                      showAddress ? const SizedBox(height: 8) : Container(),
+                                      showAddress ? LineDoubleText(
                                           label: 'Endereço: ',
-                                          value: budgetAddress),
-                                      const SizedBox(height: 8),
-                                      LineDoubleText(
+                                          value: budgetAddress,
+                                      ) : Container(),
+                                      showPhone ? const SizedBox(height: 8) : Container(),
+                                      showPhone ? LineDoubleTextLink(
                                           label: 'Telefone: ',
-                                          value: budgetPhone),
-                                      const SizedBox(height: 8),
-                                      LineDoubleText(
+                                          value: budgetPhone,
+                                          openLink: widget.openPhone,
+                                      ) : Container(),
+                                      showSite ? const SizedBox(height: 8) : Container(),
+                                      showSite ? LineDoubleTextLink(
+                                        label: 'Site: ',
+                                        value: budgetSite,
+                                        openLink: widget.openPage,
+                                      ) : Container(),
+                                      showEmail ? const SizedBox(height: 8) : Container(),
+                                      showEmail ? LineDoubleText(
+                                        label: 'E-mail: ',
+                                        value: budgetEmail,
+                                      ) : Container(),
+                                      showDescription ? const SizedBox(height: 8) : Container(),
+                                      showDescription ? LineDoubleText(
                                         label: 'Descrição: ',
                                         value: budgetDescription.isEmpty
                                             ? ''
                                             : budgetDescription,
-                                      ),
+                                      ) : Container(),
                                     ],
                                   ),
                           ],

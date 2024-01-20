@@ -14,6 +14,7 @@ import 'package:orca_e_organiza/widgets/modality_tile.dart';
 import 'package:orca_e_organiza/widgets/text_buttom_format.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ModalityScreen extends StatefulWidget {
   ModalityScreen({Key? key}) : super(key: key);
@@ -155,6 +156,8 @@ class _ModalityScreenState extends State<ModalityScreen> {
                 openModality: (int _, [bool __ = false]) {},
                 editModality: (int _) {},
                 deleteModality: (int _) {},
+                openPage: openPage,
+                openPhone: openPhone,
                 index: 0,
               ),
               const Divider(),
@@ -164,6 +167,44 @@ class _ModalityScreenState extends State<ModalityScreen> {
       },
       duration: const Duration(milliseconds: 400),
     );
+  }
+
+  Future<void> openPage(String link) async {
+    final Uri url = Uri.parse(link);
+    bool success = false;
+    try {
+      success = await launchUrl(url);
+    } on Exception catch (e) {
+      success = false;
+    }
+
+    if (!success) {
+      UtilsService.showSnackBarFormat(
+        ScaffoldMessenger.of(context),
+        'Ocorreu uma falha ao acessar o link.',
+      );
+    }
+  }
+
+  Future<void> openPhone(String phone) async {
+    final Uri url = Uri(
+      scheme: 'tel',
+      path: phone,
+    );
+    bool success = false;
+    try {
+      success = await launchUrl(url);
+    } on Exception catch (e) {
+      print(e);
+      success = false;
+    }
+
+    if (!success) {
+      UtilsService.showSnackBarFormat(
+        ScaffoldMessenger.of(context),
+        'Ocorreu uma falha ao efetuar ligação.',
+      );
+    }
   }
 
   @override
@@ -342,6 +383,8 @@ class _ModalityScreenState extends State<ModalityScreen> {
                                                 openModality: openModality,
                                                 editModality: editModality,
                                                 deleteModality: deleteModality,
+                                                openPage: openPage,
+                                                openPhone: openPhone,
                                                 index: index,
                                               ),
                                               const Divider(),

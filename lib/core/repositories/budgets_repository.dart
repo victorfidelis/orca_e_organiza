@@ -19,7 +19,9 @@ class BudgetsRepository extends ChangeNotifier {
           'description, '
           'check_, '
           'address,'
-          'phone) VALUES (?, ?, ?, ?, ?, ?, ?)';
+          'phone,'
+          'site,'
+          'email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
     List params = [
       budgetModel.modalityId,
       budgetModel.name,
@@ -28,6 +30,8 @@ class BudgetsRepository extends ChangeNotifier {
       budgetModel.check,
       budgetModel.address,
       budgetModel.phone,
+      budgetModel.site,
+      budgetModel.email,
     ];
     int id = await database.rawInsert(insert, params);
 
@@ -54,7 +58,9 @@ class BudgetsRepository extends ChangeNotifier {
         'description = ?, '
         'check_ = ?, '
         'address = ?, '
-        'phone = ? '
+        'phone = ?, '
+        'site = ?, '
+        'email = ? '
         'WHERE '
         'id = ?';
 
@@ -65,6 +71,8 @@ class BudgetsRepository extends ChangeNotifier {
       budgetModel.check,
       budgetModel.address,
       budgetModel.phone,
+      budgetModel.site,
+      budgetModel.email,
       budgetModel.id,
     ];
     int updated = await database.rawUpdate(update, params);
@@ -171,7 +179,9 @@ class BudgetsRepository extends ChangeNotifier {
           'description, '
           'check_, '
           'address, '
-          'phone '
+          'phone, '
+          'site, '
+          'email '
         'FROM Budgets '
         'WHERE modalityId = ?';
     List params = [modalityModel?.id];
@@ -189,6 +199,8 @@ class BudgetsRepository extends ChangeNotifier {
               check: e['check_'] == 1 ? true : false,
               address: e['address'] ?? '',
               phone: e['phone'] ?? '',
+              site: e['site'] ?? '',
+              email: e['email'] ?? '',
             ))
         .toList();
 

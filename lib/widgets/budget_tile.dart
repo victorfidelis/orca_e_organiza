@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:orca_e_organiza/core/models/budget_model.dart';
 import 'package:orca_e_organiza/core/services/utils_service.dart';
 import 'package:orca_e_organiza/widgets/line_double_text.dart';
+import 'package:orca_e_organiza/widgets/line_double_text_link.dart';
 import 'package:orca_e_organiza/widgets/text_button_botton_sheet.dart';
 import 'package:orca_e_organiza/core/themes/themes.dart';
 
@@ -11,6 +12,8 @@ class BudgetTile extends StatefulWidget {
   Function(int) deleteBudget;
   Function(int, [bool]) upgradeScreens;
   Function(int, bool?) checkBudget;
+  Function(String) openPage;
+  Function(String) openPhone;
   int index;
 
   static bool isStart = true;
@@ -22,6 +25,8 @@ class BudgetTile extends StatefulWidget {
     required this.deleteBudget,
     required this.upgradeScreens,
     required this.checkBudget,
+    required this.openPage,
+    required this.openPhone,
     required this.index,
   }) : super(key: key);
 
@@ -31,6 +36,12 @@ class BudgetTile extends StatefulWidget {
 
 class _BudgetTileState extends State<BudgetTile> {
   bool _animate = false;
+
+  bool showAddress = false;
+  bool showPhone = false;
+  bool showSite = false;
+  bool showEmail = false;
+  bool showDescription = false;
 
   @override
   void initState() {
@@ -52,6 +63,13 @@ class _BudgetTileState extends State<BudgetTile> {
 
   @override
   Widget build(BuildContext context) {
+
+    if (widget.budgetModel.address.trim().isNotEmpty) showAddress = true;
+    if (widget.budgetModel.phone.trim().isNotEmpty) showPhone = true;
+    if (widget.budgetModel.site.trim().isNotEmpty) showSite = true;
+    if (widget.budgetModel.email.trim().isNotEmpty) showEmail = true;
+    if (widget.budgetModel.description.trim().isNotEmpty) showDescription = true;
+
     return AnimatedOpacity(
       duration: const Duration(milliseconds: 600),
       opacity: _animate ? 1 : 0,
@@ -140,16 +158,28 @@ class _BudgetTileState extends State<BudgetTile> {
                             value:
                                 'R\$ ${formatterMoney.format(widget.budgetModel.value)}',
                           ),
-                          const SizedBox(height: 8),
-                          LineDoubleText(
+                          showAddress ? const SizedBox(height: 8) : Container(),
+                          showAddress ? LineDoubleText(
                             label: 'Endereço: ',
                             value: widget.budgetModel.address,
-                          ),
-                          const SizedBox(height: 8),
-                          LineDoubleText(
+                          ) : Container(),
+                          showPhone ? const SizedBox(height: 8) : Container(),
+                          showPhone ? LineDoubleTextLink(
                             label: 'Telefone: ',
                             value: widget.budgetModel.phone,
-                          ),
+                            openLink: widget.openPhone,
+                          ) : Container(),
+                          showSite ? const SizedBox(height: 8) : Container(),
+                          showSite ? LineDoubleTextLink(
+                            label: 'Site: ',
+                            value: widget.budgetModel.site,
+                            openLink: widget.openPage,
+                          ) : Container(),
+                          showEmail ? const SizedBox(height: 8) : Container(),
+                          showEmail ? LineDoubleText(
+                            label: 'E-mail: ',
+                            value: widget.budgetModel.email,
+                          ) : Container(),
                         ],
                       ),
                     ),
@@ -161,11 +191,11 @@ class _BudgetTileState extends State<BudgetTile> {
                     )
                   ],
                 ),
-                const SizedBox(height: 8),
-                LineDoubleText(
+                showDescription ? const SizedBox(height: 8) : Container(),
+                showDescription ? LineDoubleText(
                   label: 'Descrição: ',
                   value: widget.budgetModel.description,
-                ),
+                ) : Container(),
               ],
             ),
           ),

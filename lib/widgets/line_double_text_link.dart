@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:orca_e_organiza/core/services/utils_service.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class LineDoubleText extends StatelessWidget {
+class LineDoubleTextLink extends StatelessWidget {
   String label;
   String value;
+  Function(String) openLink;
 
-  LineDoubleText({
+  LineDoubleTextLink({
     Key? key,
     required this.label,
     required this.value,
+    required this.openLink,
   }) : super(key: key);
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +25,19 @@ class LineDoubleText extends StatelessWidget {
           ),
           softWrap: true,
         ),
-        Flexible(
-          child: Text(
-            value,
-            style: const TextStyle(
-              fontSize: 12,
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              openLink(value);
+            },
+            child: Text(
+              value,
+              style: const TextStyle(
+                fontSize: 12,
+                color: Color(0xff0000EE),
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
           ),
         ),

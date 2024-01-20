@@ -76,7 +76,9 @@ class Repository {
             'description TEXT, '
             'check_ INTEGER, '
             'address TEXT, '
-            'phone TEXT)',
+            'phone TEXT,'
+            'site TEXT,'
+            'email TEXT)',
       );
     }
 
@@ -90,6 +92,18 @@ class Repository {
     if (linesEvents != 1) {
       await database.execute('ALTER TABLE Budgets ADD COLUMN address TEXT');
       await database.execute('ALTER TABLE Budgets ADD COLUMN phone TEXT');
+    }
+
+    linesEvents = Sqflite.firstIntValue(
+      await database.rawQuery(
+        'SELECT COUNT(*) FROM sqlite_master WHERE name = ? AND sql LIKE ?',
+        ['Budgets', '%site%'],
+      ),
+    );
+
+    if (linesEvents != 1) {
+      await database.execute('ALTER TABLE Budgets ADD COLUMN site TEXT');
+      await database.execute('ALTER TABLE Budgets ADD COLUMN email TEXT');
     }
   }
 }

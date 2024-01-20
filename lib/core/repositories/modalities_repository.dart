@@ -95,7 +95,9 @@ class ModalitiesRepository extends ChangeNotifier {
         'Budgets.description as budgetDescription, '
         'Budgets.check_ as budgetCheck, '
         'Budgets.address as budgetAddress, '
-        'Budgets.phone as budgetPhone '
+        'Budgets.phone as budgetPhone, '
+        'Budgets.site as budgetSite, '
+        'Budgets.email as budgetEmail '
         'FROM '
         'Modalities '
         'LEFT JOIN Budgets ON Modalities.id = Budgets.modalityId AND Budgets.check_ = 1 '
@@ -119,6 +121,8 @@ class ModalitiesRepository extends ChangeNotifier {
           check: e['budgetCheck'] == 1,
           address: e['budgetAddress'] ?? '',
           phone: e['budgetPhone'] ?? '',
+          site: e['budgetSite'] ?? '',
+          email: e['budgetEmail'] ?? '',
         );
       }
 

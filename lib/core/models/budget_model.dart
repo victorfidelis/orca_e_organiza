@@ -9,6 +9,8 @@ class BudgetModel {
   bool check;
   String address;
   String phone;
+  String site;
+  String email;
 
   BudgetModel({
     this.id,
@@ -19,6 +21,8 @@ class BudgetModel {
     required this.check,
     required this.address,
     required this.phone,
+    required this.email,
+    required this.site,
   });
 
   Future<bool> save (BudgetsRepository budgetsRepository) async {

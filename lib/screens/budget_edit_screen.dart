@@ -1,4 +1,5 @@
 import 'package:extended_masked_text/extended_masked_text.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:orca_e_organiza/core/models/budget_model.dart';
 import 'package:orca_e_organiza/core/repositories/budgets_repository.dart';
@@ -31,6 +32,8 @@ class _BudgetEditScreenState extends State<BudgetEditScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController valueController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  TextEditingController siteController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   MaskedTextController phoneController =
       MaskedTextController(mask: '(00) 00000-0000');
   TextEditingController descriptionController = TextEditingController();
@@ -50,6 +53,8 @@ class _BudgetEditScreenState extends State<BudgetEditScreen> {
       nameController.text = widget.budget!.name;
       valueController.text = formatterMoney.format(widget.budget!.value);
       addressController.text = widget.budget!.address;
+      siteController.text = widget.budget!.site;
+      emailController.text = widget.budget!.email;
       phoneController.text = widget.budget!.phone;
       descriptionController.text = widget.budget!.description;
     } else {
@@ -62,6 +67,8 @@ class _BudgetEditScreenState extends State<BudgetEditScreen> {
         check: false,
         address: '',
         phone: '',
+        site: '',
+        email: ''
       );
     }
 
@@ -112,6 +119,16 @@ class _BudgetEditScreenState extends State<BudgetEditScreen> {
                         controller: phoneController,
                       ),
                       const SizedBox(height: 12),
+                      TextFieldFormat(
+                        label: 'Link',
+                        controller: siteController,
+                      ),
+                      const SizedBox(height: 12),
+                      TextFieldFormat(
+                        label: 'E-mail',
+                        controller: emailController,
+                      ),
+                      const SizedBox(height: 12),
                       TextFieldEditFormat(
                         label: 'Descrição',
                         controller: descriptionController,
@@ -157,6 +174,8 @@ class _BudgetEditScreenState extends State<BudgetEditScreen> {
 
     String address = addressController.text.trim();
     String phone = phoneController.text.trim();
+    String site = siteController.text.trim();
+    String email = emailController.text.trim();
     String description = descriptionController.text.trim();
 
     if (name.isEmpty) {
@@ -174,6 +193,8 @@ class _BudgetEditScreenState extends State<BudgetEditScreen> {
     widget.budget!.value = valueDouble;
     widget.budget!.address = address;
     widget.budget!.phone = phone;
+    widget.budget!.site = site;
+    widget.budget!.email = email;
     widget.budget!.description = description;
 
     AlertDialog alertDialog = AlertDialog(

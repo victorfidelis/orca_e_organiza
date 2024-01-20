@@ -10,6 +10,7 @@ import 'package:orca_e_organiza/widgets/budget_tile.dart';
 import 'package:orca_e_organiza/widgets/text_buttom_format.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BudgetScreen extends StatefulWidget {
   BudgetScreen({Key? key}) : super(key: key);
@@ -152,6 +153,8 @@ class _BudgetScreenState extends State<BudgetScreen> {
                 deleteBudget: deleteBudget,
                 upgradeScreens: upgradeScreens,
                 checkBudget: checkBudget,
+                openPage: openPage,
+                openPhone: openPhone,
                 index: index,
               ),
               const Divider(),
@@ -161,6 +164,44 @@ class _BudgetScreenState extends State<BudgetScreen> {
       },
       duration: const Duration(milliseconds: 400),
     );
+  }
+
+  Future<void> openPage(String link) async {
+    final Uri url = Uri.parse(link);
+    bool success = false;
+    try {
+      success = await launchUrl(url);
+    } on Exception catch (e) {
+      success = false;
+    }
+
+    if (!success) {
+      UtilsService.showSnackBarFormat(
+        ScaffoldMessenger.of(context),
+        'Ocorreu uma falha ao acessar o link.',
+      );
+    }
+  }
+
+  Future<void> openPhone(String phone) async {
+    final Uri url = Uri(
+      scheme: 'tel',
+      path: phone,
+    );
+    bool success = false;
+    try {
+      success = await launchUrl(url);
+    } on Exception catch (e) {
+      print(e);
+      success = false;
+    }
+
+    if (!success) {
+      UtilsService.showSnackBarFormat(
+        ScaffoldMessenger.of(context),
+        'Ocorreu uma falha ao efetuar ligação.',
+      );
+    }
   }
 
   @override
@@ -273,6 +314,8 @@ class _BudgetScreenState extends State<BudgetScreen> {
                                               deleteBudget: deleteBudget,
                                               upgradeScreens: upgradeScreens,
                                               checkBudget: checkBudget,
+                                              openPage: openPage,
+                                              openPhone: openPhone,
                                               index: index,
                                             ),
                                             const Divider(),
@@ -298,8 +341,10 @@ class _BudgetScreenState extends State<BudgetScreen> {
                                           ),
                                           type: PageTransitionType.bottomToTop,
                                           curve: Curves.easeInOut,
-                                          duration: const Duration(milliseconds: 400),
-                                          reverseDuration: const Duration(milliseconds: 400),
+                                          duration:
+                                              const Duration(milliseconds: 400),
+                                          reverseDuration:
+                                              const Duration(milliseconds: 400),
                                         ),
                                       );
                                     },
