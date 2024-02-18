@@ -7,11 +7,11 @@ import 'package:orca_e_organiza/core/themes/themes.dart';
 import 'package:orca_e_organiza/widgets/text_button_botton_sheet.dart';
 
 class EventTile extends StatefulWidget {
-  EventModel eventModel;
-  Function(EventModel, [bool]) openEvent;
-  Function(EventModel) editEvent;
-  Function(EventModel, int) deleteEvent;
-  int index;
+  final EventModel eventModel;
+  final Function(EventModel, [bool]) openEvent;
+  final Function(EventModel) editEvent;
+  final Function(EventModel, int) deleteEvent;
+  final int index;
 
   EventTile({
     Key? key,

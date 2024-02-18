@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:orca_e_organiza/core/services/utils_service.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class LineDoubleText extends StatelessWidget {
-  String label;
-  String value;
+  final String label;
+  final String value;
 
   LineDoubleText({
     Key? key,

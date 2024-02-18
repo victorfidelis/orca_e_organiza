@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
 
 class TextFieldMaskFormat extends StatelessWidget {
-  String? label;
-  MaskedTextController? controller;
-  String? errorText;
-  bool isNumeric;
+  final String? label;
+  final MaskedTextController? controller;
+  final String? errorText;
+  final bool isNumeric;
 
-  TextFieldMaskFormat({
-    Key? key,
+  const TextFieldMaskFormat({
+    super.key,
     this.label,
     this.controller,
     this.errorText,
     this.isNumeric = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

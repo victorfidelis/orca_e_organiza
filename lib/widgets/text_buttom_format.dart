@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:orca_e_organiza/core/themes/themes.dart';
 
 class TextButtomFormat extends StatelessWidget {
-  String label;
-  Function() onPressed;
+  final String label;
+  final Function() onPressed;
 
   TextButtomFormat({
     Key? key,

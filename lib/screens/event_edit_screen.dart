@@ -14,9 +14,10 @@ import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:orca_e_organiza/widgets/theme_button.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class EventEditScreen extends StatefulWidget {
   EventModel? event;
-  Function addFunction;
+  final Function addFunction;
 
   EventEditScreen({Key? key, this.event, required this.addFunction})
       : super(key: key);

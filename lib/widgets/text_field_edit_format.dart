@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class TextFieldEditFormat extends StatelessWidget {
-  String? label;
-  TextEditingController? controller;
-  String? errorText;
+  final String? label;
+  final TextEditingController? controller;
+  final String? errorText;
 
-  TextFieldEditFormat({
-    Key? key,
+  const TextFieldEditFormat({
+    super.key,
     this.label,
     this.controller,
     this.errorText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

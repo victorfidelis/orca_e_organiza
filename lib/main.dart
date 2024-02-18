@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:orca_e_organiza/core/repositories/budgets_repository.dart';
@@ -17,7 +19,10 @@ aplicativo calcula o orçamento total do seu evento, fazendo com que o usuário 
 gastos.
 */
 
+
 void main() {
+  if (1 == 2) print('teste');
+
   runApp(
     ChangeNotifierProvider(
       create: (context) => EventRepository(),

@@ -7,19 +7,19 @@ import 'package:orca_e_organiza/widgets/text_button_botton_sheet.dart';
 import 'package:orca_e_organiza/core/themes/themes.dart';
 
 class BudgetTile extends StatefulWidget {
-  BudgetModel budgetModel;
-  Function(int) editBudget;
-  Function(int) deleteBudget;
-  Function(int, [bool]) upgradeScreens;
-  Function(int, bool?) checkBudget;
-  Function(String) openPage;
-  Function(String) openPhone;
-  int index;
+  final BudgetModel budgetModel;
+  final Function(int) editBudget;
+  final Function(int) deleteBudget;
+  final Function(int, [bool]) upgradeScreens;
+  final Function(int, bool?) checkBudget;
+  final Function(String) openPage;
+  final Function(String) openPhone;
+  final int index;
 
   static bool isStart = true;
 
-  BudgetTile({
-    Key? key,
+  const BudgetTile({
+    super.key,
     required this.budgetModel,
     required this.editBudget,
     required this.deleteBudget,
@@ -28,7 +28,7 @@ class BudgetTile extends StatefulWidget {
     required this.openPage,
     required this.openPhone,
     required this.index,
-  }) : super(key: key);
+  });
 
   @override
   State<BudgetTile> createState() => _BudgetTileState();

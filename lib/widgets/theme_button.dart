@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:orca_e_organiza/core/models/theme_model.dart';
 import 'package:orca_e_organiza/core/themes/themes.dart';
-import 'package:orca_e_organiza/screens/theme_screen.dart';
 
 class ThemeButton extends StatefulWidget {
-  ThemeModel? themeModel;
-  Function() setTheme;
+  final ThemeModel? themeModel;
+  final Function() setTheme;
 
-  ThemeButton({this.themeModel, required this.setTheme, Key? key})
-      : super(key: key);
+  const ThemeButton({this.themeModel, required this.setTheme, super.key});
 
   @override
   State<ThemeButton> createState() => _ThemeButtonState();

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class TextFieldPhoneFormat extends StatelessWidget {
-  String label;
-  TextEditingController controller;
-  String? errorText;
+  final String label;
+  final TextEditingController controller;
+  final String? errorText;
 
-  TextFieldPhoneFormat({
-    Key? key,
+  const TextFieldPhoneFormat({
+    super.key,
     required this.label,
     required this.controller,
     this.errorText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class TextFieldPhoneFormat extends StatelessWidget {
         child: TextField(
           controller: controller,
           decoration: InputDecoration(
-            label: Text(label ?? ''),
+            label: Text(label),
             border: const OutlineInputBorder(),
             focusedBorder: const OutlineInputBorder(),
             enabledBorder: const OutlineInputBorder(),

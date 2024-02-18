@@ -6,9 +6,10 @@ import 'package:orca_e_organiza/widgets/text_buttom_format.dart';
 import 'package:orca_e_organiza/widgets/text_field_format.dart';
 import 'package:provider/provider.dart';
 
+//ignore: must_be_immutable
 class ModalityEditScreen extends StatefulWidget {
   ModalityModel? modality;
-  Function addItem;
+  final Function addItem;
 
   ModalityEditScreen({Key? key, this.modality, required this.addItem}) : super(key: key);
 

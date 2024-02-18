@@ -172,6 +172,7 @@ class _BudgetScreenState extends State<BudgetScreen> {
     try {
       success = await launchUrl(url);
     } on Exception catch (e) {
+      print(e);
       success = false;
     }
 

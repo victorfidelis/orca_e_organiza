@@ -1,5 +1,4 @@
 import 'package:extended_masked_text/extended_masked_text.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:orca_e_organiza/core/models/budget_model.dart';
 import 'package:orca_e_organiza/core/repositories/budgets_repository.dart';
@@ -13,11 +12,12 @@ import 'package:orca_e_organiza/widgets/text_field_money_format.dart';
 import 'package:orca_e_organiza/widgets/text_field_phone_format.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class BudgetEditScreen extends StatefulWidget {
   BudgetModel? budget;
-  Function addItem;
+  final Function addItem;
 
-  BudgetEditScreen({Key? key, this.budget, required this.addItem}) : super(key: key);
+  BudgetEditScreen({super.key, this.budget, required this.addItem});
 
   @override
   State<BudgetEditScreen> createState() => _BudgetEditScreenState();

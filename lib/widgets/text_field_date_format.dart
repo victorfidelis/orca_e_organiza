@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class TextFieldDateFormat extends StatelessWidget {
-  String? label;
-  TextEditingController controller;
-  String? errorText;
+  final String? label;
+  final TextEditingController controller;
+  final String? errorText;
   DateTime? dateValue = DateTime.now();
 
   TextFieldDateFormat({
-    Key? key,
+    super.key,
     required this.controller,
     this.label,
     this.errorText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

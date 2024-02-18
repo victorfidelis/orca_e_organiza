@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class LineDoubleTextLink extends StatelessWidget {
-  String label;
-  String value;
-  Function(String) openLink;
+  final String label;
+  final String value;
+  final Function(String) openLink;
 
-  LineDoubleTextLink({
-    Key? key,
+  const LineDoubleTextLink({
+    super.key,
     required this.label,
     required this.value,
     required this.openLink,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

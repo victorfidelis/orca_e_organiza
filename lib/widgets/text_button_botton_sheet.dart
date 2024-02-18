@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
 class TextButtonBottomSheet extends StatelessWidget {
-  String text;
-  Color color;
-  Color textColor;
-  Icon icon;
-  Function() onPressed;
+  final String text;
+  final Color color;
+  final Color textColor;
+  final Icon icon;
+  final Function() onPressed;
 
-  TextButtonBottomSheet({
-    Key? key,
+  const TextButtonBottomSheet({
+    super.key,
     required this.text,
     required this.color,
     required this.textColor,
     required this.icon,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

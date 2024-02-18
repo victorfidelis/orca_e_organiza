@@ -174,7 +174,7 @@ class _ModalityScreenState extends State<ModalityScreen> {
     bool success = false;
     try {
       success = await launchUrl(url);
-    } on Exception catch (e) {
+    } on Exception {
       success = false;
     }
 

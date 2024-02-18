@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class TextFieldFormat extends StatelessWidget {
-  String? label;
-  TextEditingController? controller;
-  String? errorText;
-  bool isNumeric;
+  final String? label;
+  final TextEditingController? controller;
+  final String? errorText;
+  final bool isNumeric;
 
-  TextFieldFormat({
-    Key? key,
+  const TextFieldFormat({
+    super.key,
     this.label,
     this.controller,
     this.errorText,
     this.isNumeric = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

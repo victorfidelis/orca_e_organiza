@@ -7,13 +7,13 @@ import 'package:orca_e_organiza/widgets/text_button_botton_sheet.dart';
 import 'package:orca_e_organiza/core/themes/themes.dart';
 
 class ModalityTile extends StatefulWidget {
-  ModalityModel modalityModel;
-  Function(int, [bool]) openModality;
-  Function(int) editModality;
-  Function(int) deleteModality;
-  Function(String) openPage;
-  Function(String) openPhone;
-  int index;
+  final ModalityModel modalityModel;
+  final Function(int, [bool]) openModality;
+  final Function(int) editModality;
+  final Function(int) deleteModality;
+  final Function(String) openPage;
+  final Function(String) openPhone;
+  final int index;
 
   static bool isStart = true;
 
